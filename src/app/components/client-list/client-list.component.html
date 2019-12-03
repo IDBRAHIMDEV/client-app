@@ -1,0 +1,46 @@
+<div class="row my-5">
+    <div class="col-md-6">
+        <h1>List of clients</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <a href="" class="btn btn-success btn-sm">
+            <i class="fa fa-plus"></i>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Infos</th>
+                    <th>Balance</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of myClients">
+                    <td>{{ client.firstName }} {{ client.lastName }}</td>
+                    <td>
+                        <strong>Email: </strong> <span class="badge badge-info">{{ client.email }}</span> - 
+                        <strong>Phone: </strong> <span class="badge badge-info">{{ client.phone }}</span>
+                        
+                        <div *ngIf="client.address">
+                            <strong>Address:</strong> <span class="badge badge-info">{{ client.address }}</span>   
+                        </div>
+                    </td>
+                    <td>{{ client.balance }}</td>
+                    <td class="text-right" nowrap>
+                        <a href="" class="btn btn-warning mr-1">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <button class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
