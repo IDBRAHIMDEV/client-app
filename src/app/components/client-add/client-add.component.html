@@ -1,1 +1,43 @@
-<p>client-add works!</p>
+<div class="row my-5">
+    <div class="col-md-6">
+        <h1>New client</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <a routerLink="/clients" class="btn btn-link">
+            <i class="fa fa-arrow-left"></i> Back to list
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <form [formGroup]="clientForm" (ngSubmit)="saveClient()">
+            <div class="form-group">
+                <label for="firstName">firstName</label>
+                <input formControlName="firstName" id="firstName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lastName">lastName</label>
+                <input formControlName="lastName" id="lastName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="phone">phone</label>
+                <input formControlName="phone" id="phone" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">email</label>
+                <input formControlName="email" id="email" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="address">address</label>
+                <input formControlName="address" id="address" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="balance">balance</label>
+                <input formControlName="balance" id="balance" type="text" class="form-control">
+            </div>
+              {{ clientForm.value | json }}
+            <button type="submit" class="btn btn-block btn-success"><i class="fa fa-save"></i> Save client</button>
+        </form>
+    </div>
+</div>

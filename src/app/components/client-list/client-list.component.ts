@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientListComponent implements OnInit {
 
+  total: number = 0;
+
   myClients: Client[] = [];
   constructor(private clientService: ClientService) { }
 
@@ -20,8 +22,15 @@ export class ClientListComponent implements OnInit {
     this.clientService.getClients()
                       .subscribe((clients: Client[]) => {
                           this.myClients = clients;
+                          this.totalBalance();
                           console.log(clients)
                       })
+  }
+
+  totalBalance() {
+    this.total = this.myClients.reduce((accum, client) => {
+      return accum + +client.balance
+    }, 0)
   }
 
 }

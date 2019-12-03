@@ -1,3 +1,4 @@
+import { Client } from './../models/client';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
@@ -13,5 +14,9 @@ export class ClientService {
 
   getClients() {
     return this.clientCollection.valueChanges();
+  }
+
+  persistClient(client: Client) {
+    return this.clientCollection.add(client);
   }
 }

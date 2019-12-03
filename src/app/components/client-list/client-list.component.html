@@ -2,8 +2,11 @@
     <div class="col-md-6">
         <h1>List of clients</h1>
     </div>
-    <div class="col-md-6 text-right">
-        <a href="" class="btn btn-success btn-sm">
+    <div class="col-md-4 text-right">
+        <h1>Total : {{ total | currency:'GBP':'symbol':'1.3-3' }}</h1>
+    </div>
+    <div class="col-md-2 text-right">
+        <a routerLink="/clients/create" class="btn btn-success btn-sm">
             <i class="fa fa-plus"></i>
         </a>
     </div>
@@ -21,7 +24,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let client of myClients">
-                    <td>{{ client.firstName }} {{ client.lastName }}</td>
+                    <td>{{ client.firstName | titlecase | lowercase }} {{ client.lastName | uppercase }}</td>
                     <td>
                         <strong>Email: </strong> <span class="badge badge-info">{{ client.email }}</span> - 
                         <strong>Phone: </strong> <span class="badge badge-info">{{ client.phone }}</span>
@@ -30,7 +33,7 @@
                             <strong>Address:</strong> <span class="badge badge-info">{{ client.address }}</span>   
                         </div>
                     </td>
-                    <td>{{ client.balance }}</td>
+                    <td>{{ client.balance | currency:'GBP':'symbol':'1.3-3' }}</td>
                     <td class="text-right" nowrap>
                         <a href="" class="btn btn-warning mr-1">
                             <i class="fa fa-pencil"></i>
