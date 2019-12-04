@@ -1,6 +1,6 @@
 import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 export class ClientAddComponent implements OnInit {
 
   clientForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    phone: new FormControl(''),
-    email: new FormControl(''),
-    balance: new FormControl(0),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    lastName: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    balance: new FormControl(0, [Validators.required]),
     address: new FormControl('')
-  })
+  });
 
   constructor(private clientService: ClientService, private router: Router) { }
 
@@ -25,6 +25,11 @@ export class ClientAddComponent implements OnInit {
   }
 
   saveClient() {
+
+    if(this.clientForm.invalid) {
+      return false;
+    }
+
     this.clientService.persistClient(this.clientForm.value)
         .then((res) => {
           this.router.navigate(['/clients'])

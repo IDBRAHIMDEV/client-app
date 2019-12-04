@@ -1,3 +1,6 @@
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ClientEditComponent } from './components/client-edit/client-edit.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ClientAddComponent } from './components/client-add/client-add.component';
 import { ClientListComponent } from './components/client-list/client-list.component';
@@ -8,7 +11,10 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: "", redirectTo: '/clients', pathMatch: 'full' },
   { path: "clients", component: ClientListComponent },
+  { path: "clients/:id/edit", component: ClientEditComponent },
   { path: "clients/create", component: ClientAddComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "login", component: LoginComponent },
   { path: "**", component: PageNotFoundComponent }
 ];
 
