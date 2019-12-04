@@ -37,7 +37,9 @@
                     
                 </div>
             </div>
-            <button [disabled]="registerForm.invalid" class="btn btn-success btn-block">
+            <button (click)="register()" 
+             [disabled]="registerForm.invalid" 
+             class="btn btn-success btn-block">
                 <i class="fa fa-user"></i> Register
                 </button>
          </form>  

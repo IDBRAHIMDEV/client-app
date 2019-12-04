@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -38,7 +41,9 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireAuthModule,
+    FlashMessagesModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

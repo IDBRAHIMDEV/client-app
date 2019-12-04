@@ -9,17 +9,17 @@
                <span class="badge badge-primary ml-3"> Login</span>
             </h1>
 
-          <form [formGroup]="registerForm">   
+          <form [formGroup]="loginForm">   
             <div class="form-group">
                 <label for="email">Email</label>
                 <input formControlName="email" type="text" class="form-control" id="email">
 
-                <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched" 
+                <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" 
                 class="alert alert-danger">
-                    <div *ngIf="registerForm.get('email').errors.required">
+                    <div *ngIf="loginForm.get('email').errors.required">
                         This field is Required !
                     </div>
-                    <div *ngIf="registerForm.get('email').errors.email">
+                    <div *ngIf="loginForm.get('email').errors.email">
                         Email not valid !
                     </div>
                 </div>
@@ -28,16 +28,16 @@
                 <label for="password">Password</label>
                 <input id="password" formControlName="password" type="password" class="form-control">
                 
-                <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched" 
+                <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" 
                 class="alert alert-danger">
                    
-                    <div *ngIf="registerForm.get('password').errors.required">
+                    <div *ngIf="loginForm.get('password').errors.required">
                         This field is Required !
                     </div>
                     
                 </div>
             </div>
-            <button [disabled]="registerForm.invalid" class="btn btn-primary btn-block">
+            <button (click)="login()" [disabled]="loginForm.invalid" class="btn btn-primary btn-block">
                 <i class="fa fa-lock"></i> Login
                 </button>
          </form>  

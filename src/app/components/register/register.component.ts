@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,9 +14,20 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(null, [Validators.required])
   });
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  register() {
+
+    if(this.registerForm.invalid) {
+      return false;
+    }
+
+    this.authService.createAccount(this.registerForm.value)
+        .then((res) => console.log('success', res))
+        .catch((err) => console.error('error', err))
   }
 
 }
