@@ -25,6 +25,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.signIn(this.loginForm.value)
         .then((res) => {
+           
+          this.authService.authenticatedUser()
+              .subscribe(user => {
+                this.authService.infoUserAuthenticated = user
+              });
+
           this.flashMessage.show('Welcome your are authenticated Successfully', 
           {
             cssClass: 'alert-success',

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -19,7 +20,10 @@ export class ClientAddComponent implements OnInit {
     address: new FormControl('')
   });
 
-  constructor(private clientService: ClientService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private clientService: ClientService, 
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -30,11 +34,19 @@ export class ClientAddComponent implements OnInit {
       return false;
     }
 
-    this.clientService.persistClient(this.clientForm.value)
-        .then((res) => {
-          this.router.navigate(['/clients'])
-        })
-        .catch((err) => console.error(err))
+    this.authService.authenticatedUser().subscribe(user => {
+      let client = {
+        ...this.clientForm.value,
+        userId: user.uid
+      }
+  
+      this.clientService.persistClient(client)
+          .then((res) => {
+            this.router.navigate(['/clients'])
+          })
+          .catch((err) => console.error(err))
+    })
+    
   }
 
 }

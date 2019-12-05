@@ -6,4 +6,5 @@ export interface Client {
     email: string;
     address?: string;
     balance: number;
+    userId?: string;
 }

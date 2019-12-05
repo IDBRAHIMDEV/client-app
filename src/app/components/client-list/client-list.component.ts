@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Client } from './../../models/client';
 import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,19 +13,24 @@ export class ClientListComponent implements OnInit {
   total: number = 0;
 
   myClients: Client[] = [];
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, private authService: AuthService) { }
 
   ngOnInit() {
     this.retreiveClientsList();
   }
 
   retreiveClientsList() {
-    this.clientService.getClients()
+
+    this.authService.authenticatedUser().subscribe(user => {
+       this.clientService.getClients(user.uid)
                       .subscribe((clients: Client[]) => {
                           this.myClients = clients;
                           this.totalBalance();
                           console.log(clients)
                       })
+    }) 
+
+   
   }
 
   totalBalance() {

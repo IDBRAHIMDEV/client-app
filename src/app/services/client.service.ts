@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Client } from './../models/client';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -9,18 +10,18 @@ import { map } from 'rxjs/operators';
 export class ClientService {
 
   clientCollection: AngularFirestoreCollection;
-  constructor(private afs: AngularFirestore) {
-    this.clientCollection = afs.collection('clients');
-  }
+  constructor(private afs: AngularFirestore, private authService: AuthService) {}
 
-  getClients() {
-    return this.clientCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Client;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
+  getClients(userId: string) {
+
+    return this.afs.collection('clients', ref => ref.where('userId', '==', userId))
+               .snapshotChanges().pipe(
+                  map(actions => actions.map(a => {
+                    const data = a.payload.doc.data() as Client;
+                    const id = a.payload.doc.id;
+                    return { id, ...data };
+                  }))
+                );
   }
 
   persistClient(client: Client) {

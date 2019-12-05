@@ -1,3 +1,5 @@
+import { Country } from './../../models/country';
+import { CountryService } from './../../services/country.service';
 import { AuthService } from './../../services/auth.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -10,13 +12,20 @@ import { Component, OnInit } from '@angular/core';
 export class RegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
+    firstName: new FormControl(null),
+    lastName: new FormControl(null),
+    gender: new FormControl('male'),
+    country: new FormControl(null),
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required])
   });
 
-  constructor(private authService: AuthService) { }
+  countries: Country[] = [];
+
+  constructor(private authService: AuthService, private countryService: CountryService) { }
 
   ngOnInit() {
+     this.countryService.getAll().subscribe(countries => this.countries = countries)
   }
 
   register() {
